@@ -1,0 +1,24 @@
+version: '1.0'
+
+services:
+    redis-master:
+        image: 'redis'
+        ports:
+          - '6379:6379'
+        environment:
+          - REDIS_REPLICATION_MODE=master 
+          - REDIS_PASSWORD=12345678
+        deploy:
+          mode: global
+          restart_policy:
+            condition: any
+        volumes: 
+          - 'redis:/opt/redis-master/etc/'
+
+volumes:
+  redis:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/opt/redis-master/etc/'
