@@ -1,8 +1,8 @@
-version: '1.0'
+version: '1'
 
 services:
     redis-master:
-        image: 'redis'
+        image: redis:1
         ports:
           - '6379:6379'
         environment:
@@ -14,12 +14,4 @@ services:
             condition: any
         volumes: 
           - 'redis:/opt/redis-master/etc/'
-
-volumes:
-  redis:
-    driver: local
-    driver_opts:
-      type: 'none'
-      o: 'bind'
-      device: '/opt/redis-master/etc/'
       
