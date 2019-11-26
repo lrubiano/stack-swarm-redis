@@ -13,7 +13,7 @@ services:
       restart_policy:
         condition: any
     volumes: 
-      - 'redis:/opt/bitnami/redis/etc/'
+      - 'redis:/redis/stack-master/etc/'
 
   redis-replica:
     image: 'bitnami/redis:5.0.2'
@@ -45,18 +45,18 @@ services:
       - redis-replica
     entrypoint: |
       bash -c 'bash -s <<EOF
-      "/bin/bash" -c "cat <<EOF > /opt/bitnami/redis/etc/sentinel.conf
+      "/bin/bash" -c "cat <<EOF > /redis/stack-master/etc/sentinel.conf
       port 16379
       dir /tmp
       sentinel monitor master-node redis-master 6379 2
       sentinel down-after-milliseconds master-node 5000
       sentinel parallel-syncs master-node 1
       sentinel failover-timeout master-node 5000
-      sentinel auth-pass master-node f7paul12-d571-4701-9c55-64vanacecDyK
+      sentinel auth-pass master-node 12345678
       sentinel announce-ip redis-sentinel
       sentinel announce-port 16379
       EOF"     
-      "/bin/bash" -c "redis-sentinel /opt/bitnami/redis/etc/sentinel.conf"    
+      "/bin/bash" -c "redis-sentinel /redis/stack-master/etc/sentinel.conf"    
       EOF'
     deploy:
       mode: global
@@ -69,4 +69,4 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/c/redis/'
+      device: '/redis/stack-master/'
