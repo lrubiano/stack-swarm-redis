@@ -1,17 +1,11 @@
 version: '3'
 
 services:
-    redis-master:
-        image: redis:5
-        ports:
-          - '6379:6379'
-        environment:
-          - REDIS_REPLICATION_MODE=master 
-          - REDIS_PASSWORD=12345678
-        deploy:
-          mode: global
-          restart_policy:
-            condition: any
-        volumes: 
-          - 'redis:/opt/redis-master/etc/'
+  web:
+    image: 127.0.0.1:5000/stackdemo
+    build: .
+    ports:
+      - "8000:8000"
+  redis:
+    image: redis:alpine
       
