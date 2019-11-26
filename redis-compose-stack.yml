@@ -7,7 +7,7 @@ services:
       - '6379:6379'
     environment:
       - REDIS_REPLICATION_MODE=master 
-      - REDIS_PASSWORD=f7paul12-d571-4701-9c55-64vanacecDyK
+      - REDIS_PASSWORD=12345678
     deploy:
       mode: global
       restart_policy:
@@ -25,8 +25,8 @@ services:
       - REDIS_REPLICATION_MODE=slave
       - REDIS_MASTER_HOST=redis-master
       - REDIS_MASTER_PORT_NUMBER=6379
-      - REDIS_MASTER_PASSWORD=f7paul12-d571-4701-9c55-64vanacecDyK
-      - REDIS_PASSWORD=f7paul12-d571-4701-9c55-64vanacecDyK
+      - REDIS_MASTER_PASSWORD=12345678
+      - REDIS_PASSWORD=12345678
     deploy:
       mode: replicated
       replicas: 6
