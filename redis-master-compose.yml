@@ -1,8 +1,8 @@
-version: '1'
+version: '5'
 
 services:
     redis-master:
-        image: redis:1
+        image: redis:5
         ports:
           - '6379:6379'
         environment:
